@@ -60,3 +60,7 @@ ${S3_BUCKET}/spark-hbase-bulkload-1.0-jar-with-dependencies.jar  \
 S3_BUCKET="s3://xxxx"
 sudo -u hbase hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles ${S3_BUCKET}/hbase-hfile/ usertable
 ```
+
+
+![](https://pcmyp.oss-cn-beijing.aliyuncs.com/markdown/202403241956889.png)
+![](https://pcmyp.oss-cn-beijing.aliyuncs.com/markdown/202403241957357.png)
