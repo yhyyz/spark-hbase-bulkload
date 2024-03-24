@@ -4,11 +4,13 @@
 ```shell
 mvn clean package -Dscope.type=provided
 # direct download
+wget https://dxs9dnjebzm6y.cloudfront.net/tmp/spark-hbase-bulkload-1.0-jar-with-dependencies.jar
+
 ```
 #### test data
 ```shell
 # test data
-S3_BUCKET="s3://panchao-data"
+S3_BUCKET="s3://xxxx"
 cat <<EOF -> test.json
 {"key":"123","col1":"customer","col2":"aws"}
 EOF
@@ -34,7 +36,7 @@ Usage: spark HBaseBulkLoad [options]
 ```
 #### spark submit job
 ```shell
-S3_BUCKET="s3://panchao-data"
+S3_BUCKET="s3://xxxx"
 spark-submit \
 --conf spark.executor.cores=2 \
 --conf spark.executor.memory=1024M \
@@ -45,7 +47,7 @@ spark-submit \
 ${S3_BUCKET}/spark-hbase-bulkload-1.0-jar-with-dependencies.jar  \
 -z 10.1.142.214:2181 \
 -s ${S3_BUCKET}/hbase-data/ \
--t ${S3_BUCKET}/hbase-hfile/105/ \
+-t ${S3_BUCKET}/hbase-hfile/ \
 -n usertable \
 -k key \
 -m col2,col1 \
@@ -55,5 +57,6 @@ ${S3_BUCKET}/spark-hbase-bulkload-1.0-jar-with-dependencies.jar  \
 
 #### load hfile
 ```shell
-sudo -u hbase hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles s3://panchao-data/hbase-hfile/105/ usertable
+S3_BUCKET="s3://xxxx"
+sudo -u hbase hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles ${S3_BUCKET}/hbase-hfile/ usertable
 ```
